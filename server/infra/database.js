@@ -1,11 +1,18 @@
-const pgp = require('pg-promise')();
+const mysql = require('mysql2')();
 
-const db = pgp({
-	user: 'postgres',
-	password: 'postgres',
+const db = mysql.createConnection({
 	host: 'localhost',
-	port: 5432,
-	databate: 'blog',
+	user: 'root',
+	password: 'mysql',
+	database: 'blog',
+});
+
+dn.connect((err) => {
+	if (err) {
+		console.log('Erro ao conectar o banco de dados');
+	} else {
+		console.log('Conexão com banco de dados estabelicida');
+	}
 });
 
 module.exports = db;
