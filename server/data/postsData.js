@@ -1,10 +1,14 @@
-const { connect } = require('../infra/database.js');
+const { executeQuery } = require('../infra/dbOperations');
 
 exports.getPosts = async function () {
-	const [data] = await connect('select * from posts');
+	const sql = 'select * from posts';
+	const [data] = await executeQuery(sql);
 	return data;
 };
 
-exports.savePosts = async function () {
-	await connect('insert');
+exports.savePosts = async function (post) {
+	const sql = 'INSERT INTO posts (title, content) VALUES (?, ?)';
+	const values = [post.title, post.content];
+	const [data] = await executeQuery(sql, values);
+	return data;
 };
