@@ -10,11 +10,8 @@ exports.savePosts = async function (post) {
 	const sql = 'INSERT INTO posts (title, content) VALUES (?, ?)';
 	const values = [post.title, post.content];
 	const [data] = await executeQuery(sql, values);
-	return data;
+	return data.insertId;
 };
 exports.deletePosts = async function (id) {
-	const sql = 'DELETE FROM posts WHERE id = ? ';
-	const values = [id];
-	const [data] = await executeQuery(sql, values);
-	return data;
+	await executeQuery('DELETE FROM blog.posts WHERE id = ?', [id]);
 };

@@ -1,10 +1,21 @@
 const axios = require('axios');
 const crypto = require('crypto');
 const postService = require('../service/postsService');
+// const { deletePosts } = require('../data/postsData');
 
 const generate = function () {
 	return crypto.randomBytes(20).toString('hex');
 };
+
+async function deleteAllPosts() {
+	const posts = await postService.getPosts();
+	for (const post of posts) {
+		await postService.deletePosts(post.id);
+	}
+}
+afterAll(async () => {
+	await deleteAllPosts();
+});
 
 test('Should get Posts', async () => {
 	// given - dado que
@@ -30,7 +41,4 @@ test('Should get Posts', async () => {
 
 	// then - então
 	expect(posts).toHaveLength(3);
-	await postService.deletePosts(post1.id);
-	await postService.deletePosts(post2.id);
-	await postService.deletePosts(post3.id);
 });
