@@ -1,20 +1,24 @@
 const mysql = require('mysql2/promise');
 
-async function dataConnection() {
-	const database = await mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'mysql',
-		database: 'blog',
-	});
+function connectDatabase() {
 	try {
-		await database.connect();
+		const database = mysql.createConnection({
+			host: 'localhost',
+			user: 'root',
+			password: 'mysql',
+			database: 'blog',
+		});
 		console.log('Conexão com banco de dados estabelicida');
 		return database;
 	} catch (err) {
-		console.log('Erro ao conectar ao banco de dados', err);
+		console.log('Erro ao conectar ao banco de dados', err.message);
 		throw err;
 	}
 }
 
-module.exports = dataConnection;
+async function connect(sql) {
+	const database = await connectDatabase();
+	return database.query(sql);
+}
+
+module.exports = { connect };
