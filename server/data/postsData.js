@@ -12,3 +12,9 @@ exports.savePosts = async function (post) {
 	const [data] = await executeQuery(sql, values);
 	return data;
 };
+exports.deletePosts = async function (id) {
+	const sql = 'DELETE FROM posts WHERE id = ? ';
+	const values = [id];
+	const [data] = await executeQuery(sql, values);
+	return data;
+};

@@ -30,4 +30,7 @@ test('Should get Posts', async () => {
 
 	// then - então
 	expect(posts).toHaveLength(3);
+	await postService.deletePosts(post1.id);
+	await postService.deletePosts(post2.id);
+	await postService.deletePosts(post3.id);
 });

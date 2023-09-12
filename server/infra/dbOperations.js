@@ -1,4 +1,4 @@
-const { connectDatabase } = require('./dbConnect');
+const { connectDatabase } = require('./dbConnection');
 
 async function executeQuery(sql, values) {
 	const database = await connectDatabase();

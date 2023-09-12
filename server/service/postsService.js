@@ -6,3 +6,6 @@ exports.getPosts = function () {
 exports.savePosts = function (post) {
 	return postData.savePosts(post);
 };
+exports.deletePosts = function (post) {
+	return postData.deletePosts(post);
+};
