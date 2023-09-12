@@ -4,6 +4,7 @@ const postService = require('../service/postsService');
 
 router.get('/posts/', async function (req, res) {
 	const posts = await postService.getPosts();
+
 	res.json(posts);
 });
 router.get('/posts/:id', async function (req, res) {});
