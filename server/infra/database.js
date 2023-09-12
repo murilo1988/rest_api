@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-async function dbConnection() {
+async function dataConnection() {
 	const database = await mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
@@ -17,4 +17,4 @@ async function dbConnection() {
 	}
 }
 
-module.exports = dbConnection;
+module.exports = dataConnection;

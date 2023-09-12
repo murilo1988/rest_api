@@ -10,5 +10,5 @@ test('Should get Posts', async function () {
 
 	const [firstPost] = posts;
 	expect(firstPost.id).toBe(1);
-	expect(firstPost.title).toBe('REST API:métodos');
+	expect(firstPost.title).toBe('REST_API :métodos');
 });

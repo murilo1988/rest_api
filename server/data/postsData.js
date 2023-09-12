@@ -1,8 +1,8 @@
-const databaseConnection = require('../infra/database.js');
+const dataConnection = require('../infra/database.js');
 
 exports.getPosts = async function () {
 	try {
-		const database = await databaseConnection();
+		const database = await dataConnection();
 		const [data] = await database.query('SELECT * FROM posts');
 		return data;
 	} catch (err) {
