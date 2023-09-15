@@ -7,6 +7,10 @@ const generate = function () {
 	return crypto.randomBytes(20).toString('hex');
 };
 
+const request = function (url, method, data) {
+	return axios({ url, method, data });
+};
+
 async function deleteAllPosts() {
 	const posts = await postService.getPosts();
 	for (const post of posts) {
@@ -31,14 +35,19 @@ test('Should get Posts', async () => {
 		title: generate(),
 		content: generate(),
 	});
-
 	// when - quando acontecer
-	const response = await axios({
-		url: 'http://localhost:3000/posts',
-		method: 'get',
-	});
+	const response = await request('http://localhost:3000/posts', 'get');
 	const posts = response.data;
-
 	// then - então
 	expect(posts).toHaveLength(3);
+});
+
+test('should save post', async function () {
+	const data = { title: generate(), content: generate() };
+	const response = await request('http://localhost:3000/posts', 'post', data);
+	console.log(response.data);
+	const post = response.data;
+	console.log(post);
+	expect(post.title).toBe(data.title);
+	expect(post.content).toBe(data.content);
 });
